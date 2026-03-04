@@ -1,7 +1,7 @@
 import { MessageCircle, FileText, Wrench, MoreHorizontal, Phone } from 'lucide-react';
 
 function App() {
-  const whatsappNumber = '5511964323323';
+  const whatsappNumber = '5519982488926';
 
   const openWhatsApp = (message: string) => {
     const encodedMessage = encodeURIComponent(message);
@@ -13,7 +13,7 @@ function App() {
       <div className="container mx-auto px-4 py-8 max-w-6xl">
         <header className="text-center mb-12 pt-8">
           <div className="inline-block bg-gradient-to-r from-rose-600 to-pink-600 text-white px-8 py-4 rounded-2xl shadow-lg mb-6">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Sem Parar</h1>
+            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Sejam bem-vindos</h1>
           </div>
           <p className="text-xl md:text-2xl text-gray-700 font-light">Central de Atendimento</p>
         </header>
