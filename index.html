@@ -1,16 +1,371 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sem parar Self-Service Portal</title>
-    <meta property="og:image" content="https://bolt.new/static/og_default.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://bolt.new/static/og_default.png" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARLOS EDUARDO GOMES CARBOBIAK | Consultoria Digital Transparente</title>
+
+    <style>
+        :root {
+            --cor-primaria: #0056b3; /*  */
+            --cor-secundaria: #007bff; /* Azul Claro */
+            --cor-fundo: #f8f9fa; /* Cinza Claro */
+            --cor-texto: #343a40; /* Cinza Escuro */
+            --cor-clara: #ffffff;
+            --sombra-card: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Reset Básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            background-color: var(--cor-fundo);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Cabeçalho (Header) */
+        header {
+            background-color: var(--cor-clara);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--cor-primaria);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--cor-texto);
+            padding: 10px 15px;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--cor-secundaria);
+        }
+        
+        /* Layout Mobile: Menu em coluna ou simplificado */
+        @media (max-width: 768px) {
+            header .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            nav {
+                display: none; /* Esconde menu para simplificação. Em um projeto real, usaria um ícone de menu hamburger. */
+            }
+            .logo {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Seções */
+        section {
+            padding: 60px 0;
+            margin-bottom: 20px;
+        }
+
+        .hero {
+            background-color: var(--cor-primaria);
+            color: var(--cor-clara);
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--cor-primaria);
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        /* Estilo para Conteúdo e Cards */
+        .content-card {
+            background-color: var(--cor-clara);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--sombra-card);
+            margin-bottom: 30px;
+        }
+
+        /* Seção Quem Somos (Transparência) */
+        #quem-somos ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        #quem-somos ul li {
+            background-color: var(--cor-fundo);
+            padding: 15px;
+            border-left: 4px solid var(--cor-secundaria);
+            border-radius: 4px;
+        }
+
+        #quem-somos strong {
+            color: var(--cor-primaria);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Serviços */
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .servico-item h3 {
+            color: var(--cor-secundaria);
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Contato Visível */
+        #contato-visivel {
+            background-color: var(--cor-primaria);
+            color: var(--cor-clara);
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        #contato-visivel h2 {
+            color: var(--cor-clara);
+            margin-bottom: 20px;
+        }
+
+        .contato-links a {
+            display: inline-block;
+            background-color: var(--cor-clara);
+            color: var(--cor-primaria);
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .contato-links a:hover {
+            background-color: var(--cor-fundo);
+            transform: translateY(-2px);
+        }
+
+        /* Rodapé (Footer) */
+        footer {
+            background-color: var(--cor-texto);
+            color: var(--cor-clara);
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        /* Política de Privacidade (Estilo em seção) */
+        #politica-privacidade {
+            background-color: var(--cor-clara);
+            border-top: 1px solid #ddd;
+        }
+
+        #politica-privacidade h2 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        #politica-privacidade p {
+            margin-bottom: 15px;
+        }
+
+        .politica-topico {
+            margin-top: 25px;
+            font-weight: bold;
+            color: var(--cor-secundaria);
+        }
+
+        /* Responsividade para Cards */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            section {
+                padding: 40px 0;
+            }
+            h2 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="#inicio" class="logo">CARLOS EDUARDO GOMES CARBOBIAK</a>
+            <nav>
+                <ul>
+                    <li><a href="#quem-somos">Quem Somos</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#contato-visivel">Contato</a></li>
+                    <li><a href="#politica-privacidade">Privacidade</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <h1>Transparência e Resultados no Marketing Digital.</h1>
+            <p>Sua parceria confiável para gestão de tráfego pago e crescimento estratégico online. Foco total em conformidade e clareza de operações.</p>
+        </div>
+    </section>
+
+    <section id="quem-somos" class="container">
+        <h2>Quem Somos: Transparência e Credibilidade</h2>
+        <div class="content-card">
+            <p>Atuo como consultora de marketing digital, com foco em gestão de campanhas online (Google Ads, Meta Ads) e desenvolvimento de estratégias de presença digital. Meu compromisso é com a transparência total nas operações e na comunicação com meus clientes.</p>
+
+            <h3>Dados de Registro e Localização:</h3>
+            <ul>
+                <li>
+                    <strong>Nome Completo / Responsável:</strong>
+                    CARLOS EDUARDO GOMES CARBOBIAK
+                </li>
+                <li>
+                    <strong>Registro Legal:</strong>
+                    CNPJ: 65.543.950/0001-08 (Profissional Liberal)
+                </li>
+                <li>
+                    <strong>Endereço de Atendimento:</strong>
+                    Endereço da organização
+                    RUA FRANCISCO DE ALMEIDA FILHO, 59 - CIDADE INDUSTRIAL - CURITIBA - PR - CEP 81279-215 - Brasil
+                </li>
+                <li>
+                    <strong>E-mail (Profissional/Suporte):</strong>
+                    CADUCARBOBIAK@GMAIL.COM
+                </li>
+                <li>
+                    <strong>Telefone/WhatsApp:</strong>
+                    (41) 9660-4511
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="servicos" class="container">
+        <h2>Nossos Serviços Estratégicos</h2>
+        <div class="servicos-grid">
+            
+            <div class="content-card servico-item">
+                <h3>Gestão de Tráfego Pago (Google Ads)</h3>
+                <p>Criação, otimização e gerenciamento contínuo de campanhas no Google Ads, focando em busca, display e vídeo. Total aderência às políticas de publicidade e transparência em relatórios.</p>
+            </div>
+
+            <div class="content-card servico-item">
+                <h3>Estratégia de Marketing Digital</h3>
+                <p>Desenvolvimento de planos de marketing completos, análise de mercado, público-alvo e jornada do cliente para maximizar o retorno sobre o investimento (ROI).</p>
+            </div>
+            
+            <div class="content-card servico-item">
+                <h3>Desenvolvimento de Landing Pages</h3>
+                <p>Criação de páginas de destino (Landing Pages) otimizadas para conversão, garantindo velocidade, responsividade e alinhamento com as diretrizes do Google.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contato-visivel">
+        <div class="container">
+            <h2>Fale Conosco Imediatamente</h2>
+            <p>Entre em contato pelos canais abaixo para iniciar sua estratégia digital com total transparência.</p>
+            <div class="contato-links">
+                <a href="https://wa.me/[INSERIR TELEFONE COMERCIAL AQUI]" target="_blank">WhatsApp (Prioritário)</a>
+                <a href="mailto:[INSERIR E-MAIL COMERCIAL AQUI]">E-mail de Suporte</a>
+                <a href="tel:[INSERIR TELEFONE COMERCIAL AQUI]">Ligar Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="politica-privacidade" class="container">
+        <h2>Política de Privacidade e Termos de Serviço</h2>
+        <div class="content-card">
+            
+            <p>A transparência e a segurança dos dados são pilares de nossas operações. Esta seção detalha como seus dados e os dados de seus clientes são tratados em conformidade com a legislação brasileira (LGPD).</p>
+
+            <h3 class="politica-topico">1. Informações Coletadas</h3>
+            <p>Coletamos informações básicas de contato (nome, e-mail, telefone) fornecidas voluntariamente para fins de comunicação comercial e execução de serviços contratados. Não coletamos dados sensíveis sem consentimento explícito.</p>
+
+            <h3 class="politica-topico">2. Uso das Informações</h3>
+            <p>Os dados coletados são estritamente utilizados para:</p>
+            <ul>
+                <li>Execução e entrega dos serviços de marketing digital contratados.</li>
+                <li>Comunicação sobre o progresso dos projetos.</li>
+                <li>Cumprimento de obrigações legais e contratuais.</li>
+            </ul>
+
+            <h3 class="politica-topico">3. Compartilhamento de Dados</h3>
+            <p>Nenhuma informação pessoal é vendida ou alugada a terceiros. Os dados podem ser compartilhados apenas com ferramentas e plataformas estritamente necessárias para a execução do serviço (ex: plataformas de anúncios, sistemas de CRM) sob contrato de confidencialidade.</p>
+
+            <h3 class="politica-topico">4. Direitos do Titular (LGPD)</h3>
+            <p>O titular dos dados tem o direito de solicitar a qualquer momento acesso, correção ou exclusão de seus dados. Para exercer seus direitos, entre em contato via e-mail fornecido na seção "Quem Somos".</p>
+            
+            <h3 class="politica-topico">5. Conformidade Google Ads</h3>
+            <p>Garantimos que todas as campanhas e landing pages criadas por nossa consultoria seguem rigorosamente as políticas de publicidade e verificação do Google Ads, incluindo a apresentação clara da identidade e dos dados de contato da responsável pelo serviço, conforme exigido para a verificação de operações comerciais.</p>
+
+            <p style="margin-top: 20px; font-size: 0.9em; text-align: center;">Última Atualização: Janeiro de 2026.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Responsável: CARLOS EDUARDO GOMES CARBOBIAK | CNPJ: 65.543.950/0001-08</p>
+            <p>&copy; 2026 Carlos Eduardo Gomes Carbobiak. Todos os direitos reservados. | <a href="#politica-privacidade" style="color: #ccc; text-decoration: none;">Política de Privacidade</a></p>
+            <p style="margin-top: 10px;">Endereço para Verificação: RUA FRANCISCO DE ALMEIDA FILHO, 59 - CIDADE INDUSTRIAL - CURITIBA - PR - CEP 81279-215 - Brasil.</p>
+        </div>
+    </footer>
+
+</body>
 </html>
